@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--希望子组件里产生一些数据，让组件知道-->
+<!--父组件模板-->
+<div id="app">
+    <!-- v-on:  === @ 监听 -->
+    <cpn @item-click="cpnClick"></cpn>
+</div>
+
+<!--子组件模板-->
+<template id="cpn">
+    <!--  vue中，子组件模板里包含多个标签时，需要在根里-->
+    <div>
+        <button v-for="item in categories"
+                @click="btnClick(item)">
+            {{item.name}}
+        </button>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+
+<script>
+    // 子组件
+    const cpn = {
+        template: `#cpn`,
+        data() {
+            return {
+                categories: [
+                    {id: 'aaa', name: '热门推荐'},
+                    {id: 'bbb', name: '手机数码'},
+                    {id: 'ccc', name: '家用家电'},
+                    {id: 'ddd', name: '电脑办公'}
+                ]
+            }
+        },
+        // 发射事件
+        methods: {
+            btnClick(item) {
+                this.$emit('item-click', item)
+            }
+        }
+    }
+
+    // 父组件
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: '你好啊'
+        },
+        components: {
+            cpn
+        },
+        methods: {
+            // item别忘了写
+            // 如果父组件里没有item，在子组件模板中，会默认把发射事件里的item传过去
+            cpnClick(item) {
+                console.log('cpnClick', item);
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

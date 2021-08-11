@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<button>按钮1</button>
+<button>按钮2</button>
+<button>按钮3</button>
+<button>按钮4</button>
+<button>按钮5</button>
+
+<script>
+    // 1. 没有块级作用域引起的问题：for的块级
+    // 为什么闭包可以解决我们的问题：因为函数是一个作用域
+
+    // 1.情况一：ES5中没有使用到闭包（错误的方式）
+    var btns = document.getElementsByTagName('button');
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener('click', function () {
+            console.log('第' + i + '个按钮被点击');
+        })
+    }
+    // 因为没有作用域的概念，i在花括号里面定义和在外面定义，效果一样，一个道理
+    i = 0
+    {
+        var i = 0
+        btns[i].addEventListener('click', function () {
+            console.log('第' + i + '个按钮被点击');
+        })
+    }
+
+    {
+        var i = 1
+        btns[i].addEventListener('click', function () {
+            console.log('第' + i + '个按钮被点击');
+        })
+    }
+
+    {
+        var i = 2
+        btns[i].addEventListener('click', function () {
+            console.log('第' + i + '个按钮被点击');
+        })
+    }
+
+    {
+        var i = 3
+        btns[i].addEventListener('click', function () {
+            console.log('第' + i + '个按钮被点击');
+        })
+    }
+
+    {
+        var i = 4
+        btns[i].addEventListener('click', function () {
+            console.log('第' + i + '个按钮被点击');
+        })
+    }
+
+    // 2. 情况二：ES5中使用闭包（代码在01里应该有）
+    var btns = document.getElementsByTagName('button');
+    for (var i = 0; i < btns.length; i++) {
+        (function (i) {
+            btns[i].addEventListener('click', function () {
+                console.log('第' + i + '个按钮被点击');
+            })
+        })(i)
+    }
+
+    function () {  // num:0
+        console.log('第' + i + '个按钮被点击');
+    }
+
+    function () {  // num:1
+        console.log('第' + i + '个按钮被点击');
+    }
+
+    function () {  // num:2
+        console.log('第' + i + '个按钮被点击');
+    }
+
+    function () {  // num:3
+        console.log('第' + i + '个按钮被点击');
+    }
+
+    function () {  // num:4
+        console.log('第' + i + '个按钮被点击');
+    }
+
+
+    // ES6中的Let有自己的作用域。因此不需要再调用函数
+    const btns = document.getElementsByTagName('button')
+    for (let i = 0; i < btns.length; i++) {
+        btns[i].addEventListener('click', function () {
+            console.log('第' + i + '个按钮被点击');
+        })
+    }
+    // ES5用的是同一个i,一个i改变了，都改变了
+    {
+        i = 0
+        btns[i].addEventListener('click', function () {
+            console.log('第' + i + '个按钮被点击');
+        })
+    }
+
+    {
+        i = 1
+        btns[i].addEventListener('click', function () {
+            console.log('第' + i + '个按钮被点击');
+        })
+    }
+
+    {
+        i = 2
+        btns[i].addEventListener('click', function () {
+            console.log('第' + i + '个按钮被点击');
+        })
+    }
+
+    {
+        i = 3
+        btns[i].addEventListener('click', function () {
+            console.log('第' + i + '个按钮被点击');
+        })
+    }
+
+    {
+        i = 4
+        btns[i].addEventListener('click', function () {
+            console.log('第' + i + '个按钮被点击');
+        })
+    }
+</script>
+
+</body>
+</html>

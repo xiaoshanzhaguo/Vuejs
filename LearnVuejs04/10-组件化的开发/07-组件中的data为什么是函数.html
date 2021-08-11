@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <cpn></cpn>
+    <cpn></cpn>
+    <cpn></cpn>
+</div>
+
+<template id="cpn">
+    <div>
+        <h2>当前计数：{{counter}}</h2>
+        <button @click="increment">+</button>
+        <button @click="decrement">-</button>
+        <!--    当前计数和下面的按钮，必须放到一个div里-->
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+
+<script>
+    // 1.注册组件
+    Vue.component('cpn', {
+        template: `#cpn`,
+        data() {
+            return {
+                counter: 0
+            }
+        },
+        methods: {
+            increment() {
+                this.counter++
+            },
+            decrement() {
+                this.counter--
+            }
+        }
+    })
+
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: '你好啊'
+        }
+    })
+</script>
+
+<script>
+    function abc() {
+        return {
+            name: 'why',
+            age: 18
+        }
+    }
+
+    let obj1 = abc()
+    let obj2 = abc()
+    let obj3 = abc()
+    // 这三个不是一个对象
+
+    obj1.name = 'kobe'
+    console.log(obj2);
+    console.log(obj3);
+</script>
+</body>
+</html>

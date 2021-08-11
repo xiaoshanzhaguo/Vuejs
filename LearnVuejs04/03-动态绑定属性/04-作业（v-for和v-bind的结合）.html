@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--作业需求：点击列表中的哪一项，那么该项的文字变成红色-->
+<div id="app">
+    <ul>
+        <!--    遍历的是li，应该为多条li,v-for不应该放在ul里面-->
+        <!--    变量 in 列表-->
+        <li v-for="m in movies">{{m}}</li>
+    </ul>
+
+    <nav-bar bgc="white"></nav-bar>
+</div>
+
+<script src="../js/vue.js"></script>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            movies: ['海王', '海尔兄弟', '火影忍者', '进击的巨人']
+        }
+    })
+</script>
+
+</body>
+</html>

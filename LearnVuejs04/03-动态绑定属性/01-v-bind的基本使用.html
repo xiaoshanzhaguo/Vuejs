@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <!--  错误的做法,mustache语法只能在内容里使用，不能放在属性值里-->
+    <!--  <img src="{{imgURL}}" alt="">-->
+    <!--  正确的做法，使用v-bind指令-->
+    <img v-bind:src="imgURL" alt=""> <!--这里会把imgURL当成变量-->
+    <a v-bind:href="aHref">百度一下</a>  <!--从服务器请求过来的数据-->
+    <!--  <h2>{{}}</h2>-->
+
+    <!--  语法糖的写法-->
+    <img :src="imgURL" alt=""> <!--这里会把imgURL当成变量-->
+    <a :href="aHref">百度一下</a>  <!--从服务器请求过来的数据-->
+</div>
+
+<script src="../js/vue.js"></script>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: '你好啊',
+            imgURL: 'https://img30.360buyimg.com/seckillcms/s280x280_jfs/t1/173743/25/15263/170269/60cbf2eeEa92bb45e/1856ae804e3f35c8.jpg.webp',
+            aHref: 'http://www.baidu.com'
+        }
+    })
+</script>
+
+</body>
+</html>

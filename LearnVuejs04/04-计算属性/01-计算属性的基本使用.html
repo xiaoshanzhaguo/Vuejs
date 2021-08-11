@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <h2>{{firstName + ' ' + lastName}}</h2>
+    <h2>{{firstName}} {{lastName}}</h2>
+
+    <h2>{{getFullName()}}</h2>
+    <!--  接下来演示计算属性的办法-->
+
+    <h2>{{fullName}}</h2>
+</div>
+
+<script src="../js/vue.js"></script>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            firstName: 'Lebron',
+            lastName: 'James'
+        },
+        // 下面的这些属性不能乱起，因为他是固定的
+        // computed: 计算属性(),本质是属性，如下是只实现了get方法
+        computed: {
+            fullName: function () {
+                return this.firstName + ' ' + this.lastName;
+            }
+        },
+        methods: {
+            getFullName() {
+                return this.firstName + ' ' + this.lastName;
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

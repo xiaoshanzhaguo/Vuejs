@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <cpn></cpn>
+    <cpn>
+        <!--    <span v-for="item in pLanguages"></span>-->
+        <!--  目的是获取子组件中的pLanguages
+              vue2.5.x以下，要用template模板，2.5.x以上用div也可以-->
+        <template slot-scope="slot">
+            <!--      <span v-for="item in slot.data">{{item}} - </span>-->
+            <span>{{slot.abc.join(' - ')}}</span>  <!-- 这里意味着用-来进行分割  -->
+        </template>
+    </cpn>
+    <!--  <cpn></cpn>-->
+
+    <cpn>
+        <!--    <span v-for="item in pLanguages"></span>-->
+        <!--  目的是获取子组件中的pLanguages
+              vue2.5.x以下，要用template模板，2.5.x以上用div也可以-->
+        <template slot-scope="slot">
+            <!--      <span v-for="item in slot.data">{{item}} * </span>-->
+            <span>{{slot.abc.join(' * ')}}</span>
+        </template>
+    </cpn>
+</div>
+
+<template id="cpn">
+    <div>
+        <slot :abc="pLanguages">
+            <ul>
+                <li v-for="item in pLanguages">{{item}}</li>
+            </ul>
+        </slot>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: '你好啊'
+        },
+        components: {
+            cpn: {
+                template: `#cpn`,
+                data() {
+                    return {
+                        pLanguages: ['JavaScript', 'C++', 'Java', 'C#', 'Python', 'go', 'Swift']
+                    }
+                },
+                created() {
+                    this.pLanguages.join('---')
+                }
+            }
+        }
+    })
+</script>
+
+
+</body>
+</html>

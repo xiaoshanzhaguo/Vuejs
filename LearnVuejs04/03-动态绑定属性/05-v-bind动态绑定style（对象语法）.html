@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <!--  <h2 :style="{key(属性名)：value(属性值)}">{message}}</h2>-->
+    <!--  下面将50px当成变量，导致编译错误，data里面没有50px这个变量-->
+    <!--    前面fontSize不用加单引号，默认为一个key,后面50px一定要加单引号-->
+    <!--  '50px'必须加上单引号，否则是当做一个变量去解析-->
+    <!--  <h2 :style="{fontSize: '50px'}">{{message}}</h2>-->
+
+    <!--  下方是直接引用我们的变量，finalSize当成一个变量使用-->
+    <!--  下面这种写法是会做隐式转换-->
+    <h2 :style="{fontSize: finalSize + 'px',backgroundColor: finalColor}">{{message}}</h2>
+    <h2 :style="getStyles()">{{message}}</h2>
+</div>
+
+<script src="../js/vue.js"></script>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: '你好啊',
+            finalSize: 100,
+            finalColor: 'red'
+        },
+        methods: {
+            getStyles: function () {
+                return {fontSize: this.finalSize + 'px', backgroundColor: this.finalColor}
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

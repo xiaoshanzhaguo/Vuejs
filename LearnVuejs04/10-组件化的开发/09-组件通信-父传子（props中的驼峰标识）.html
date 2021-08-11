@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <cpn :c-info="info" :child-my-message="message"></cpn>
+</div>
+
+<template id="cpn">
+    <!--   vue中，子组件模板里包含多个标签时，需要在根里-->
+    <div>
+        <h2>{{cInfo}}</h2>
+        <h2>{{childMyMessage}}</h2>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+
+<script>
+    const cpn = {
+        template: `#cpn`,
+        props: {
+            cInfo: {
+                type: Object,
+                default() {
+                    return {};
+                }
+            },
+            childMyMessage: {
+                type: String,
+                default() {
+                    return undefined;
+                }
+            }
+        }
+    }
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: 'aaaaa',
+            info: {
+                name: 'why',
+                age: 18,
+                height: 1.88
+            }
+        },
+        components: {
+            cpn
+        }
+    })
+</script>
+
+</body>
+</html>

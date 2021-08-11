@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <h2>当前计数{{counter}}</h2>
+    <!--  <button v-on:click="counter++">+</button>-->
+    <!--  <button v-on:click="counter&#45;&#45;">-</button>-->
+    <button v-on:click="add">+</button>
+    <button @click="sub">-</button>
+</div>
+
+<script src="../js/vue.js"></script>
+
+<script>
+    // 语法糖：简写
+    const app = new Vue({
+        // el: '#app',
+        el: document.querySelector(),  //找字符串或HTMLElement
+        data: {
+            counter: 0
+        },
+        methods: {
+            add: function () {
+                console.log("add被执行");
+                this.counter++;  //表示当前对象
+            },
+            sub: function () {
+                console.log("sub被执行");
+                this.counter--;
+            }
+            // sub为函数的名字，后面的function即为方法，后面会使用ES6的方法
+        }
+    })
+</script>
+
+<!--    1.拿button元素-->
+
+<!--        添加监听事件-->
+</body>
+</html>

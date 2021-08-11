@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .active {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <!--  <h2 class="active">{{message}}</h2>-->
+    <!--  <h2 :class="active">{{message}}</h2>-->
+    <!--  <h2 v-bind:class="{类名1：boolean,类名2：boolean}">{{message}}</h2>   &lt;!&ndash;{}表示跟上的是对象&ndash;&gt;-->
+    <h2 class="title" v-bind:class="{active: isActive, line: isLine}">{{message}}</h2>
+    <h2 class="title" v-bind:class="getClasses()">{{message}}</h2>
+    <!--      会合并上面两个class,不会进行覆盖。固定的class放在前面，可能会删除的class放在后面-->
+    <button v-on:click="btnClick">按钮</button>
+</div>
+
+<script src="../js/vue.js"></script>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: '你好啊',
+            isActive: true,
+            isLine: false
+        },
+        methods: {
+            btnClick: function () {
+                this.isActive = !this.isActive;
+            },
+            getClasses: function () {
+                return {active: this.isActive, line: this.isLine}
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

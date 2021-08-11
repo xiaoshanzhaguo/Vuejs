@@ -1,0 +1,5 @@
+body {
+    /*background-color: red;*/
+    /* 这个css文件有一张图片，webpack会把它当成一个模块，去加载这个图片*/
+    background: url("../img/timg.jpg");
+}
