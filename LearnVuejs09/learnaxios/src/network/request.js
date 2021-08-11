@@ -110,6 +110,7 @@ export function request(config, success, failure) {
     })
 }
 
+
 function test(aaa, bbb) {
   // aaa('Hello World')
   bbb('err message')
