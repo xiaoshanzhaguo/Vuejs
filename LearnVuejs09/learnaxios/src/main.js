@@ -128,3 +128,38 @@ const instance2 = axios.create({
   timeout: 10000,
   // headers: {}
 })
+
+// 5. 封装一个request模块
+import {request} from "./network/request"
+import {replaceUrl} from "postcss-url/src/lib/decl-processor";
+
+request({
+  url: '/home/multidata'
+},res => {
+  // 这里就不输出了，直接进行回调
+  console.log(res);
+  // success(res);
+},err => {
+  console.log(err);
+  // failure(res);
+})
+
+request({
+  baseConfig: {
+    // 传入基本的配置
+  },
+  success: function (res) {
+
+  },
+  failure: function (err) {
+
+  }
+})
+
+request({
+  url: '/home/multidata'
+}).then(res => {
+  console.log(res);
+}).catch(err => {
+  console.log(err);
+})
