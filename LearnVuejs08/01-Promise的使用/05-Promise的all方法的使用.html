@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  Promise.all([  // 这里要传入的是可迭代的东西，是数组
+    // 模拟的过程
+    // new Promise((resolve, reject) => {
+    //   // 这里没有引用Jquery,写这个没有意义
+    //   $.ajax({
+    //     url: 'url1',
+    //     success: function (data) {
+    //       resolve(data)
+    //     }
+    //   })
+    // }),
+    // new Promise((resolve, reject) => {
+    //   $.ajax({
+    //     url: 'url2',
+    //     success: function (data) {
+    //       resolve(data)
+    //     }
+    //   })
+    // })
+
+    // 用setTime来模拟，把setTimeout当成一个网络请求
+    // 为了模拟，用setTimeout,真实开发用的是$.ajax
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({name: 'why', age: 18})
+      }, 2000)
+    }),
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({name: 'kobe', age: 19})
+      }, 1000)
+    })
+  ]).then(results => {  // results是个数组，最终results里面放的是两个对象
+    console.log(results);
+  })
+</script>
+
+</body>
+</html>
