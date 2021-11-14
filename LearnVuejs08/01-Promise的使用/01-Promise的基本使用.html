@@ -70,12 +70,19 @@
   // 什么情况下会用到promise?
   // 一般情况下，是有异步操作时，使用Promise对这个异步操作进行封装
   // executor 执行 .executor 缩写，可执行文件
-  // new -> 构造函数(1. 保存一些状态信息  2. 执行传入的函数)
+  // new -> 构造函数(1. 保存一些状态信息  2. 执行传入的函数（内部执行）) 这里是在new的时候执行了一些操作
+  // 在保存完信息后，会直接执行传入的函数，而且在执行这个函数的时候，会给这个函数传入两个参数，
+  // resolve, reject 的函数不是自己手动执行的，它内部来执行我们传入的函数
   // 在执行我们传入的回调函数时，会传入两个参数，一个叫resolve,一个叫reject，本身又是函数
+  // 将请求的代码和处理的代码进行分离，等你下一步还有网络请求的时候，就可以再进行一步一步的分离，这样就能使我们的代码变得更加优雅
   new Promise((resolve, reject) => {
-    setTimeout((data) => {
+    //这里做网络请求，不负责处理，写异步代码的，处理代码写在下面
+    setTimeout(() => {
+      // 这里拿到一个data,你现在不想处理，我想交给专门的地方进行处理，就可以加上下面的代码
+      resolve(data) //然后这里的data就会传入下面的then里面的data,如果在resolve里面有一个参数，就意味在then里面有个data参数
+      //一旦将data传入resolve里面，到时候再回调then函数时，就会将data传入then的参数列表中
       // 成功的时候调用resolve
-      // resolve('Hello liyuqiu')
+      resolve('Hello liyuqiu')  //这里的字符串的内容，就是下方打印的data内容！！！
       // resolve后，会调用then这个函数
 
       // 失败的时候调用reject
