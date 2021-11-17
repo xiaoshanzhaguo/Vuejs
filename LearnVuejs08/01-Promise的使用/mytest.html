@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // const promise = new Promise(function (resolve, reject) {
+        //     setTimeout(() => {
+        //         const time = Date.now()
+        //
+        //         if (time % 2 === 1) {
+        //             resolve('成功的值' + time);
+        //         } else {
+        //             reject('失败的值' + time);
+        //         }
+        //     }, 2000)
+        // });
+        //
+        // promise.then(function (value) {
+        //     // success
+        //     console.log('成功的value', value);
+        // })
+        // promise.catch(function (error) {
+        //     // failure
+        //     console.log('失败的value', error);
+        // })
+        const promise = new Promise(function (resolve, reject) {
+            setTimeout(function() {
+                const time = Date.now()
+                if (time % 2 === 1) {
+                    resolve('成功的值' + time);
+                } else {
+                    reject('失败的值' + time);
+                }
+            }, 2000)
+        });
+
+        promise.then(function (value) {
+            // success
+            console.log('成功的value', value);
+        },(function (error) {
+            // failure
+            console.log('失败的value', error);
+        }))
+    </script>
+</body>
+
+</html>

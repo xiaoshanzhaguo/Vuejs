@@ -1,109 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
 </head>
+
 <body>
 
-<script>
-  // 下面是同步的代码
-  // const name = 'why'
-  // console.log(name);
-  //
-  // const result = 3 + 5;
+  <script>
+    // 下面是同步的代码
+    // const name = 'why'
+    // console.log(name);
+    //
+    // const result = 3 + 5;
 
-  // 1. 使用setTimeout
-  // setTimeout(() => {
-  //   console.log('Hello World');
-  // }, 1000)
+    // 1. 使用setTimeout
+    // setTimeout(() => {
+    //   console.log('Hello World');
+    // }, 1000)
 
-  // 参数本身是一个函数(resolve, reject)
-  // resolve,reject 本身又是函数
-  // 链式编程
-  new Promise((resolve, reject) => {
-    // 第一次网络请求的代码
-    setTimeout(() => {
-      resolve()
-    })
-  }).then(() => {
-    // 第一次拿到结果的处理代码
-    console.log('Hello World');
-    console.log('Hello World');
-    console.log('Hello World');
-    console.log('Hello World');
-    console.log('Hello World');
-    console.log('Hello World');
-
-    return new Promise((resolve, reject) => {
-      // 第二次网络请求的代码
+    // 参数本身是一个函数(resolve, reject)
+    // resolve,reject 本身又是函数
+    // 链式编程
+    new Promise((resolve, reject) => {
+      // 第一次网络请求的代码
       setTimeout(() => {
         resolve()
-      }, 1000)
+      })
     }).then(() => {
-      // 第二次拿到结果的处理代码
-      console.log('Hello Vuejs');
-      console.log('Hello Vuejs');
-      console.log('Hello Vuejs');
-      console.log('Hello Vuejs');
-      console.log('Hello Vuejs');
-      console.log('Hello Vuejs');
-      console.log('Hello Vuejs');
+      // 第一次拿到结果的处理代码
+      console.log('Hello World');
+      console.log('Hello World');
+      console.log('Hello World');
+      console.log('Hello World');
+      console.log('Hello World');
+      console.log('Hello World');
 
       return new Promise((resolve, reject) => {
-        // 第三次网络请求的代码
+        // 第二次网络请求的代码
         setTimeout(() => {
-            resolve()
+          resolve()
         }, 1000)
       }).then(() => {
-        // 第三次拿到结果的处理代码
-        console.log('Hello Python');
-        console.log('Hello Python');
-        console.log('Hello Python');
-        console.log('Hello Python');
-        console.log('Hello Python');
-        console.log('Hello Python');
+        // 第二次拿到结果的处理代码
+        console.log('Hello Vuejs');
+        console.log('Hello Vuejs');
+        console.log('Hello Vuejs');
+        console.log('Hello Vuejs');
+        console.log('Hello Vuejs');
+        console.log('Hello Vuejs');
+        console.log('Hello Vuejs');
+
+        return new Promise((resolve, reject) => {
+          // 第三次网络请求的代码
+          setTimeout(() => {
+            resolve()
+          }, 1000)
+        }).then(() => {
+          // 第三次拿到结果的处理代码
+          console.log('Hello Python');
+          console.log('Hello Python');
+          console.log('Hello Python');
+          console.log('Hello Python');
+          console.log('Hello Python');
+          console.log('Hello Python');
+        })
       })
     })
-  })
 
-  // 什么情况下会用到promise?
-  // 一般情况下，是有异步操作时，使用Promise对这个异步操作进行封装
-  // executor 执行 .executor 缩写，可执行文件
-  // new -> 构造函数(1. 保存一些状态信息  2. 执行传入的函数（内部执行）) 这里是在new的时候执行了一些操作
-  // 在保存完信息后，会直接执行传入的函数，而且在执行这个函数的时候，会给这个函数传入两个参数，
-  // resolve, reject 的函数不是自己手动执行的，它内部来执行我们传入的函数
-  // 在执行我们传入的回调函数时，会传入两个参数，一个叫resolve,一个叫reject，本身又是函数
-  // 将请求的代码和处理的代码进行分离，等你下一步还有网络请求的时候，就可以再进行一步一步的分离，这样就能使我们的代码变得更加优雅
-  new Promise((resolve, reject) => {
-    //这里做网络请求，不负责处理，写异步代码的，处理代码写在下面
-    setTimeout(() => {
-      // 这里拿到一个data,你现在不想处理，我想交给专门的地方进行处理，就可以加上下面的代码
-      resolve(data) //然后这里的data就会传入下面的then里面的data,如果在resolve里面有一个参数，就意味在then里面有个data参数
-      //一旦将data传入resolve里面，到时候再回调then函数时，就会将data传入then的参数列表中
-      // 成功的时候调用resolve
-      resolve('Hello liyuqiu')  //这里的字符串的内容，就是下方打印的data内容！！！
-      // resolve后，会调用then这个函数
+    // 什么情况下会用到promise?
+    // 一般情况下，是有异步操作时，使用Promise对这个异步操作进行封装
+    // executor 执行 .executor 缩写，可执行文件
+    // new -> 构造函数(1. 保存一些状态信息  2. 执行传入的函数（内部执行）) 这里是在new的时候执行了一些操作
+    // 在保存完信息后，会直接执行传入的函数，而且在执行这个函数的时候，会给这个函数传入两个参数，
+    // resolve, reject 的函数不是自己手动执行的，它内部来执行我们传入的函数
+    // 在执行我们传入的回调函数时，会传入两个参数，一个叫resolve,一个叫reject，本身又是函数
+    // 将请求的代码和处理的代码进行分离，等你下一步还有网络请求的时候，就可以再进行一步一步的分离，这样就能使我们的代码变得更加优雅
+    new Promise((resolve, reject) => {
+      //这里做网络请求，不负责处理，写异步代码的，处理代码写在下面
+      setTimeout(() => {
+        // 这里拿到一个data,你现在不想处理，我想交给专门的地方进行处理，就可以加上下面的代码
+        resolve(data) //然后这里的data就会传入下面的then里面的data,如果在resolve里面有一个参数，就意味在then里面有个data参数
+        //一旦将data传入resolve里面，到时候再回调then函数时，就会将data传入then的参数列表中
+        // 成功的时候调用resolve
+        resolve('Hello liyuqiu')  //这里的字符串的内容，就是下方打印的data内容！！！
+        // resolve后，会调用then这个函数
 
-      // 失败的时候调用reject
-      reject('error message')
-    }, 1000)
-  }).then((data) => {
-    // 1. 100行的处理代码
-    console.log(data);
-    console.log(data);
-    console.log(data);
-    console.log(data);
-    console.log(data);
-  }).catch(err => {
-    console.log(err);
-    console.log(err);
-    console.log(err);
-    console.log(err);
-    console.log(err);
-  })
+        // 失败的时候调用reject
+        reject('error message')
+      }, 1000)
+    }).then((data) => {
+      // 1. 100行的处理代码
+      console.log(data);
+      console.log(data);
+      console.log(data);
+      console.log(data);
+      console.log(data);
+    }).catch(err => {
+      console.log(err);
+      console.log(err);
+      console.log(err);
+      console.log(err);
+      console.log(err);
+    })
 
-</script>
+
+    const promise = new Promise(function (resolve, reject) {
+      setTimeout(() => {
+        const time = Date.now()
+        console.log(time);
+
+        if (time %2 === 1) {
+          resolve('成功的值' + time);
+        } else {
+          reject('失败的值' + time);
+        }
+      }, 2000)
+    });
+
+    promise.then(function (value) {
+      // success
+      console.log('成功的value', value);
+    }, function (error) {
+      // failure
+      console.log('失败的value', error);
+    });
+  </script>
 
 </body>
+
 </html>
