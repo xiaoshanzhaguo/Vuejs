@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <cpn><span slot="center">中间变化</span></cpn>
+
+    <cpn></cpn>
+</div>
+
+<template id="cpn">
+    <div>
+        <slot name="header">这是头部</slot>
+        <slot name="center">这是中间</slot>
+        <slot name="footer">这是尾部</slot>
+        <slot>哈哈哈</slot>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: '今天也要开心呀！'
+        },
+        components: {
+            cpn: {
+                template: `#cpn`
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

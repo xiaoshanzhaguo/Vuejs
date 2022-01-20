@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <cpn></cpn>
+    <cpn>
+<!--        注意下面一定要用slot-scope 否则内容都显示不出来-->
+        <template slot-scope="slot">
+            <span>{{slot.data.join('-')}}</span>
+        </template>
+    </cpn>
+
+    <cpn>
+        <template slot-scope="slot">
+            <span>{{slot.data.join('*')}}</span>
+        </template>
+    </cpn>
+</div>
+
+<template id="cpn">
+    <div>
+        <slot :data="pList">
+            <ul>
+                <li v-for="items in pList">{{items}}</li>
+            </ul>
+        </slot>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: '你好呀'
+        },
+        components: {
+            cpn: {
+                template: `#cpn`,
+                data() {
+                    return {
+                        pList: ['李', '爱', '龚', '爱', '李']
+                    }
+                },
+                created() {
+                    this.pList.join('---')
+                }
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
