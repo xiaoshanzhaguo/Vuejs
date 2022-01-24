@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <h2>当前计数：{{counter}}</h2>
+    <button @click="decrement">-</button>
+    <button @click="increment">+</button>
+</div>
+
+<script src="../js/vue.js"></script>
+
+<script>
+  const app = new Vue({
+      el: '#app',
+      data: {
+          counter: 0
+      },
+      methods: {
+          increment() {
+              console.log("加事件发生")
+              // this指向的是当前的app对象
+              this.counter++;
+          },
+          decrement() {
+              console.log("减事件发生")
+              this.counter--;
+          }
+      }
+  })
+</script>
+
+</body>
+</html>

@@ -18,12 +18,16 @@
 
 <script>
     // 语法糖：简写
+    // proxy
+    const obj = {
+        counter: 0,
+        message: 'abc'
+    }
+
     const app = new Vue({
-        // el: '#app',
-        el: document.querySelector(),  //找字符串或HTMLElement
-        data: {
-            counter: 0
-        },
+        el: '#app',
+        // el: document.querySelector(),  //找字符串或HTMLElement
+        data: obj,
         methods: {
             add: function () {
                 console.log("add被执行");
@@ -38,8 +42,9 @@
     })
 </script>
 
+<!-- 以前是命令式编程 -->
 <!--    1.拿button元素-->
 
-<!--        添加监听事件-->
+<!--    2.添加监听事件-->
 </body>
 </html>
