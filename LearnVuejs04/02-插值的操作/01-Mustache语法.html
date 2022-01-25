@@ -9,11 +9,13 @@
 <div id="app">
     <h2>{{message}}</h2>
     <h2>{{message}}，你银河！</h2>
-    <!--  mustache语法中，不仅仅可以直接写变量，也可以写一些简单的表达式-->
+    <!--  mustache语法中，不仅仅可以直接写变量，也可以写一些简单的表达式
+    上面的message是变量，而这里是个表达式（把左边的变量和右边的变量相加）-->
     <h2>{{firstName + lastName}}</h2>
     <h2>{{firstName + ' ' + lastName}}</h2>
     <h2>{{firstName}} {{lastName}}</h2>
-    <h2>{{counter * 2}}</h2> //还可以使用计算属性
+    <!-- 希望每次显示counter的两倍，这里也写一个表达式 -->
+    <h2>{{counter * 2}}</h2>
 </div>
 
 <script src="../js/vue.js"></script>
