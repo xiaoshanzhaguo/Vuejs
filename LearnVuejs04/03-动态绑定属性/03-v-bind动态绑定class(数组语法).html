@@ -7,9 +7,10 @@
 <body>
 
 <div id="app">
+    <!-- 这个东西也是可以跟普通的类共存的 -->
     <h2 class="title" :class="[active, line]">{{message}}</h2>
     <h2 class="title" :class="getClasses()">{{message}}</h2>
-    <!--  有单引号，解释为字符串；无单引号，解释为变量-->
+    <!--  有单引号，解释为字符串；无单引号，解释为变量 -->
 
 </div>
 
