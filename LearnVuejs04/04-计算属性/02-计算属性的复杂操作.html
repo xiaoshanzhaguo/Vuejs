@@ -7,6 +7,7 @@
 <body>
 
 <div id="app">
+    <!-- 需求：将书的总价格显示到这里 -->
     <h2>总价格：{{totalPrice}}</h2>
     <h2>总价格：{{getTotalPrice}}</h2>
 </div>
@@ -18,6 +19,7 @@
         el: '#app',
         data: {
             books: [
+                //  数组里放的是对象
                 {id: 110, name: 'Unix编程艺术', price: 119},
                 {id: 111, name: '代码大全', price: 105},
                 {id: 112, name: '深入理解计算机原理', price: 98},
@@ -35,7 +37,7 @@
             totalPrice: function () {
                 let result = 0   /**初始化这一步很重要**/
                 // 这里讲简单方法  return this.books.reduce()
-                //   let里面是块级作用域，而且在ES6里面就不要使用var了
+                // 这里用let会比较好，因为let是有块级作用域的，而且在ES6里面就不要使用var了
                 for (let i = 0; i < this.books.length; i++) {
                     result += this.books[i].price
                 }
@@ -45,7 +47,7 @@
                 // for (let i in this.books) {
                 //   this.books[i]
                 // }
-                // // 这里要注意 in 和 of 的区别
+                // // 这里要注意 in 和 of 的区别，用of的话，下面就直接用book，不用this.books[i]
                 // for (let book of this.books) {
                 //   // 这里可以直接用book
                 // }
