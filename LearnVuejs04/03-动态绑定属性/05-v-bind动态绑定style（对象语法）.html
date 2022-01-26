@@ -7,14 +7,20 @@
 <body>
 
 <div id="app">
-    <!--  <h2 :style="{key(属性名)：value(属性值)}">{message}}</h2>-->
-    <!--  下面将50px当成变量，导致编译错误，data里面没有50px这个变量-->
-    <!--    前面fontSize不用加单引号，默认为一个key,后面50px一定要加单引号-->
-    <!--  '50px'必须加上单引号，否则是当做一个变量去解析-->
-    <!--  <h2 :style="{fontSize: '50px'}">{{message}}</h2>-->
+    <!-- 对象语法 -->
+    <!--  <h2 :style="{key(属性名)：value(属性值)}">{message}}</h2>  -->
+
+    <!-- 下面将50px当成变量，导致编译错误，data里面没有50px这个变量(数字不能作为变量的开头)
+      前面fontSize不用加单引号，默认为一个key来使用,比如之前的active也没加单引号，就把它当成字符串，当作整个对象的key
+      '50px'必须加上单引号，当成字符串解析，否则是当做一个变量去解析
+      其中 fontSize和'font-size'的写法都可以，但驼峰标识会更好看一点
+
+      下面的这种写法还是写死的情况。
+    -->
+    <!--  <h2 :style="{fontSize: '50px'}">{{message}}</h2>  -->
 
     <!--  下方是直接引用我们的变量，finalSize当成一个变量使用-->
-    <!--  下面这种写法是会做隐式转换-->
+    <!--  下面这种写法是会做隐式转化，把finalSize + 'px'当成一个表达式，将这两个东西进行连接，在连接时作隐式转化，前者变成字符串然后进行连接-->
     <h2 :style="{fontSize: finalSize + 'px',backgroundColor: finalColor}">{{message}}</h2>
     <h2 :style="getStyles()">{{message}}</h2>
 </div>
@@ -27,7 +33,7 @@
         data: {
             message: '你好啊',
             finalSize: 100,
-            finalColor: 'red'
+            finalColor: 'red' //key的值可以随便写，但是red是字符串，必须加''
         },
         methods: {
             getStyles: function () {
