@@ -7,10 +7,12 @@
 <body>
 
 <div id="app">
+    <!--  data里有imgURL,如何将这个数据放到img里，实现动态绑定呢？  -->
+
     <!--  错误的做法,mustache语法只能在内容里使用，不能放在属性值里-->
     <!--  <img src="{{imgURL}}" alt="">-->
     <!--  正确的做法，使用v-bind指令-->
-    <img v-bind:src="imgURL" alt=""> <!--这里会把imgURL当成变量-->
+    <img v-bind:src="imgURL" alt=""> <!--！！！这里会把imgURL当成变量-->
     <a v-bind:href="aHref">百度一下</a>  <!--从服务器请求过来的数据-->
     <!--  <h2>{{}}</h2>-->
 
