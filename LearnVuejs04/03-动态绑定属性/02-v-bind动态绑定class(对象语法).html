@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <style type="text/css">
+    <style>
         .active {
             color: red;
         }
@@ -12,13 +12,23 @@
 <body>
 
 <div id="app">
+    <!--  以前普通的方式  -->
     <!--  <h2 class="active">{{message}}</h2>-->
+
+    <!--  加上动态绑定  -->
     <!--  <h2 :class="active">{{message}}</h2>-->
-    <!--  <h2 v-bind:class="{类名1：boolean,类名2：boolean}">{{message}}</h2>   &lt;!&ndash;{}表示跟上的是对象&ndash;&gt;-->
+    <!--  动态绑定是可以加上对象的，可以在里面放上键值对  -->
+    <!--  <h2 v-bind:class="{类名1：boolean,类名2：boolean}">{{message}}</h2> {}表示跟上的是对象  -->
+
+    <!--  在class中，只有bool值为true的才会被绑定上来  -->
     <h2 class="title" v-bind:class="{active: isActive, line: isLine}">{{message}}</h2>
-    <h2 class="title" v-bind:class="getClasses()">{{message}}</h2>
-    <!--      会合并上面两个class,不会进行覆盖。固定的class放在前面，可能会删除的class放在后面-->
+
+    <!-- 需求2 点击按钮 颜色变化  -->
     <button v-on:click="btnClick">按钮</button>
+
+    <!-- 觉得上面class后面的东西太长，下面进行了改变 -->
+    <!-- 加上class title，会合并上面两个class,不会进行覆盖。固定的class放在前面，可能会删除的class放在后面-->
+    <h2 class="title" v-bind:class="getClasses()">{{message}}</h2>
 </div>
 
 <script src="../js/vue.js"></script>
