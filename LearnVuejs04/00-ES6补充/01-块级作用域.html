@@ -13,19 +13,25 @@
 <button>按钮5</button>
 
 <script>
-    // ES5中的var是没有块级作用域的
-    // ES6中的let是有块级作用域（if/for）
-    // // 在ES5之前，因为if和for都没有块级作用域的概念，所以再很多时候，
-    // 我们必须借助于function的作用域来解决外面变量的问题
-    // ES6中加入了let，let它是有if和for的块级作用域
+/*    ES5中的var是没有块级作用域的
+    ES6中的let是有块级作用域（if/for）
+
+    在ES5之前，因为if和for都没有块级作用域的概念，所以在很多时候，
+    我们必须借助于function(而我们这个function是匿名的function)的作用域来解决引用外面变量的问题
+
+    ES6中加入了let，let它是有if和for的块级作用域*/
+
     // 1. 变量作用域：变量在什么范围内是可用的
     {
+        // 在大括号里面定义一个name,log name在大括号里面肯定是可以使用的
+        // 因为它的作用域包括到大括号里面
         var name = 'why';
         console.log(name)
     }
-    console.log(name);  // var没有块级作用域
+    // log name在大括号外面也可以，因为{}并不是变量作用域的限制。
+    console.log(name);
 
-    // 2.没有块级作用域，引起的问题(if的块级)
+    // 2.没有块级作用域引起的问题：if的块级
     // var func;
     // if (true) {
     //   var name = 'why';
@@ -34,32 +40,38 @@
     //     console.log(name);
     //   }
     // }
+
+    // 在开发里面，假如把func作为参数传给了别人，其他人也想输出name，但是另外的人在这之前更改了name
     // name = 'kobe'
     // func()
     // console.log(name);
     // func()
-    var name = 'why'
 
+    // 3.2 对于函数来说，有属于它的name，外面改了name也不影响，函数内部优先使用作用域里面的name
+    var name = 'why'
     function abc(bbb) {  //bbb = 'why'
         console.log(bbb);
     }
-
     abc(name)
     name = 'kobe'
 
 
-    // 3.for的块级也没有作用域
-    // i变成了5,为了解决问题，搞个闭包
-    // 为什么闭包可以解决我们的问题：因为函数是一个作用域
+    // 3.没有块级作用域引起的问题：for的块级
+    // 需求：监听按钮的点击，当点击第一个按钮，输出第一个按钮被点击，以此类推。
+
+   /* 3.1 结果：for循环（同步事件）只是给每个按钮绑定上事件（异步事件），用户点击了才触发事件，那个时候for循环早就结束了（异步事件等同步事件执行完再执行）
+   当点击按钮时，系统回调输出的函数。for循环遍历后，i变成了5,每次点击都是第5个按钮，为了解决问题，搞个闭包
+    为什么闭包（写起来太麻烦）可以解决我们的问题：因为函数是一个作用域（外面再随便改，我的i还是我的i）*/
     // var btns = document.getElementsByTagName('button');
     // for (var i = 0; i < btns.length; i++) {
-    //   (function (i) {
-    //     btns[i].addEventListener('click', function () {
-    //       console.log('第' + i + '个按钮被点击');
+    //   (function (num) {
+    //     btns[num].addEventListener('click', function () {
+    //       console.log('第' + num + '个按钮被点击');
     //     })
-    //   })(i)
+    //   })(i)  3.3 把这个i传给了上面function里的num,function里的num引用的就是之前的i的值
     // }
 
+    // 3.4 一共有5个函数
     // function () {  // num:0
     //   console.log('第' + i + '个按钮被点击');
     // }
@@ -76,13 +88,16 @@
     //   console.log('第' + i + '个按钮被点击');
     // }
 
+
+    // 4. ES6中let的使用
+    // 我们可以理解成，btns[i] 中的i每次都会接收值 0-4，但如果使用的是var，当for循环里的i变成4时，之前传给btns[i]中的i都变成了4。
     const btns = document.getElementsByTagName('button')
     for (let i = 0; i < btns.length; i++) {
         btns[i].addEventListener('click', function () {
             console.log('第' + i + '个按钮被点击');
         })
     }
-    // ES5用的是同一个i,一个i改变了，都改变了
+    // ES5用的是同一个i,一个i改变了，都改变了，而ES6不同
     {
         i = 0
         btns[i].addEventListener('click', function () {
