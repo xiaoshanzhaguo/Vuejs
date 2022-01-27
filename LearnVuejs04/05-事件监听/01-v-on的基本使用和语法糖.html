@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <h2>{{counter}}</h2>
+    <!-- v-bind的语法糖 -->
+    <!--  <h2 v-bind:title></h2>-->
+    <!--  <h2 :title></h2>-->
+
+    <!-- 1. 第一种counter++的写法 直接在里面写表达式 -->
+    <!--  <button v-on:click="counter++">+</button>-->
+    <!--  <button v-on:click="counter&#45;&#45;">-</button>-->
+
+    <!-- 2. 如果是复杂的操作，就应该将操作放到方法里面，这里绑定对应的方法
+    然后在v-on里调用函数，在函数里面做对应的事情。-->
+    <!--  <button v-on:click="increment">+</button>-->
+    <!--  <button v-on:click="decrement">-</button>-->
+
+    <!-- 2.1 v-on还可以监听键盘的抬起，即冒号后面不仅仅可以加click -->
+    <!--<button v-on:keyup="xxx">+</button>-->
+
+    <!-- v-on的语法糖，以后开发一般都用语法糖，因为它更简洁 -->
+    <button @click="increment">+</button>
+    <button @click="decrement">-</button>
+</div>
+
+<script src="../js/vue.js"></script>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            counter: 0
+        },
+        methods: {
+            increment() {
+                this.counter++;
+            },
+            decrement() {
+                this.counter--;
+            }
+        }
+    })
+
+</script>
+
+</body>
+</html>
