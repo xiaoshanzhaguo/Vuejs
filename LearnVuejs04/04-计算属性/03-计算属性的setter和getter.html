@@ -20,27 +20,42 @@
             lastName: 'Bryant'
         },
         computed: {
+            // 1.下面这种写法其实是计算属性的简写，我们真实在computed（对象中）中写计算属性并不是这种写法
             // fullName: function () {
             //   return this.firstName + ' ' + this.lastName
             // }
-            // 文件里的这个大括号本质上是对象
-            // name: 'coderwhy'  这里定义的是属性
+
+            // 2. 计算属性的真实写法（文件里的这个大括号本质上是对象）
+            // name: 'coderwhy'  可以在这里定义一个属性，但是我们要定义的是fullName这个属性
+
+            // 3. 与上面的name不同，fullName对应的不是字符串，而是对象
             fullName: {
-                // set: function () {
-                //   //set方法一般不实现
-                //   // console.log("----")
-                //   const names = newValues.split(' ');  // 先分开
+                // 4.1 在这里面会写两个东西，一个是set方法
+                // 6.2 set真的准备实现的话，这里肯定还是有个参数newValue(这样就会将console中改变后的值传进去)
+                // set: function (newValue) {
+                // 6.1 加上set方法（set方法一般不实现）
+                //   console.log("----", newValue)  // 在console台设置值时被调用(app.fullName = 'xxx')
+
+                // 6.3 将newValue保存起来
+                //   const names = newValues.split(' ');  // 先分开，对newValue进行截取
                 //   this.firstName = names[0];
                 //   this.lastName = names[1];
                 // },
-                // 现在计算属性只剩下一个get方法
-                // 计算属性一般是没有set方法，只读属性
+
+
+                // 4.2 另一个是set方法
+                // 计算属性一般是没有set方法，只读属性（不希望它设置值）
                 /**在对象里定义了fullName这个属性，然后在这个属性里又定义对象（即属性又是一个对象）**/
                 get: function () {
                     return this.firstName + ' ' + this.lastName
                 }
                 // 平常的情况即为省略了get这个字。
-            }
+            },
+
+            // 5. 故这里是相对于get方法的省略写法
+            // fullName: function () {
+            //     return this.firstName + ' ' + this.lastName
+            // }
         }
     })
 </script>
