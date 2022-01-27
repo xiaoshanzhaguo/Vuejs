@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    // 1. 什么叫字面量？ {}这个大括号就叫做对象的字面量
+    // const obj = new Object()
+    // const obj = {}
+
+    // const obj = {
+    //   name: 'why',
+    //   age: 18,
+    //   run: function () {
+    //     console.log("在奔跑");
+    //   },
+    //   eat: function () {
+    //     console.log("在吃东西");
+    //   }
+    // }
+
+    // 1. 属性的增强写法
+    const name = 'why';
+    const age = 18;
+    const height = 1.88;
+
+    // 1.1 ES5的写法
+    // const obj = {
+    //   name: name,
+    //   age: age,
+    //   height: height
+    // }
+
+    // 1.2 ES6的增强写法（它内部会把变量的名称作为它的key，把变量/常量具体的值作为value）
+    const obj = {
+        name,
+        age,
+        height
+    }
+    console.log(obj);
+
+    // 2. 函数的增强写法
+
+    // 2.1 ES5的写法
+    // const obj = {
+    //   run: function () {
+    //
+    //   },
+    //   eat: function () {
+    //
+    //   }
+    // }
+
+    // 2.2 ES6的写法
+    const obj = {
+        run() {
+
+        },
+        eat() {
+
+        }
+    }
+
+    // 3. 如果浏览器不支持ES6怎么办？后面会有工具自动把ES6转成ES5。Vue/rect开发用的全都是ES6
+
+    // 4. JavaScript存在很大的问题，没有类型检测，会在运行时出现很多问题
+    // 4.1 比如现在定义一个切割字符串的函数
+    function split_string(str) {
+        str.split
+    }
+    split_string(123) // 有些用户可能会将数字传进去，就会有问题，但是在编译代码时并不报错，只有运行到这行代码时才会报错
+    // 4.1.1 对于typescript，它可以在形参这里加类型限制 str: String
+
+    // 4.2 下面两个都可以做类型检测
+    // TypeScript(microsoft) -> ts(类型检测) Angular整个项目在开发时就使用TypeScript
+    // flow(facebook) ->
+
+    // 4.3
+    // Angular(google) 项目本身就是TypeScript的
+    // react框架(facebook)
+</script>
+
+</body>
+</html>
