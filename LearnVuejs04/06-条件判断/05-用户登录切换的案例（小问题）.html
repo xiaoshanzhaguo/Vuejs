@@ -6,5 +6,30 @@
 </head>
 <body>
 
+<div id="app">
+  <span v-if="isUser">
+    <!-- 使用for和id，点击用户账号这个文字的时候，input输入框会是聚焦的状态 -->
+    <label for="username">用户账号</label>
+    <input type="text" id="username" placeholder="用户账号" key="username">
+  </span>
+    <span v-else>
+     <label for="email">用户邮箱</label>
+    <input type="text" id="email" placeholder="用户邮箱" key="email">
+  </span>
+    <button @click="isUser = !isUser">切换类型</button>
+</div>
+
+<script src="../js/vue.js"></script>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            // 用一个状态来确定显示谁
+            isUser: true
+        }
+    })
+</script>
+
 </body>
 </html>
