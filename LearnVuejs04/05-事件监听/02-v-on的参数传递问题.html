@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <!-- 1. 演示事件调用的方法没有参数 -->
+    <button @click="btn1Click()">按钮1</button>
+    <button @click="btn1Click">按钮1</button>
+
+    <!-- 2. 在事件定义时，写方法时省略了小括号，但是方法本身是需要一个参数的，这个时候，
+    Vue会默认将浏览器生产的event事件对象作为参数传入到方法
+    下面这行的写法是 btn2Click方法有一个参数abc-->
+    <!--<button @click="btn2Click(123)">按钮2</button>-->
+
+    <!-- 2.1 原理同下一行，例子看最下方代码 -->
+    <!--<button @click="btn2Click()">按钮2</button> 有括号，但是括号里无参数，输出的是undefined-->
+
+    <!-- 2.2 下方是在事件监听中比较特殊的情况，现在既没有传参数，但是又要求你传参数，而我这里又没有写()
+    这时输出的是MouseEvent，这里其实是把event传过来（一旦在界面做了一些操作时，浏览器会自动生成一个event对象）
+    在某些时候你需要用到event对象的时候，你就可以这个event对象去做对应的事情，这时候不用加参数或者()，会自动将event对象以参数的形式传过去。
+    如果你不需要event对象，直接在下面的方法中把event参数去掉即可。-->
+    <button @click="btn2Click">按钮2</button>
+
+    <!--  3. 在方法定义时，我们需要event对象，同时又需要其他参数 -->
+    <!-- 3.1 在定义了btn3Click方法后，如果两个参数都不传，会输出MouseEvent,undefined
+    vue会自动把event事件赋值给第一个参数，而event参数没人传东西，故变成undefined -->
+    <button @click="btn3Click">按钮3</button>
+
+    <!-- 3.2 在参数中直接写event不行，找不到这个参数，因为直接这样写，vue会把它当成变量或方法（比如会去找data里定义的event变量）
+    在调用方法时，如何手动得获取到浏览器参数的event对象：$event（固定写法），当vue在内部解析时，发现这里是$event，
+    它会拿到浏览器产生的evnet对象，作为参数传到btn3Click方法里
+    将第一个参数123改成'abc' 不加单引号就是一个变量或方法，需要在data里面定义才对 -->
+    <button @click="btn3Click('abc',$event)">按钮3</button>
+
+</div>
+
+<script src="../js/vue.js"></script>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: '你好啊',
+            event: 'coderwhy',
+            abc: 123
+        },
+        methods: {
+            btn1Click() {
+                console.log("btnClick");
+            },
+            btn2Click(event) {
+                console.log('-----', event);
+            },
+            btn3Click(abc, event) {
+                console.log('+++++', abc, event);
+            }
+        }
+    })
+
+    /* 2.1 如果函数需要参数，但是没有传入，那么函数的形参为underfined
+      function abc(name) {
+        console.log(name);
+      }
+      abc()*/
+</script>
+
+</body>
+</html>
