@@ -8,10 +8,10 @@
 
 <div id="app">
   <span v-if="isUser">
+    <!-- 使用for和id，点击用户账号这个文字的时候，input输入框会是聚焦的状态 -->
     <label for="username">用户账号</label>
     <input type="text" id="username" placeholder="用户账号" key="username">
   </span>
-  <!--   出于性能考虑，会复用input标签，先做了解即可。需要key一样才会进行复用-->
   <span v-else>
      <label for="email">用户邮箱</label>
     <input type="text" id="email" placeholder="用户邮箱" key="email">
