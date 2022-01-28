@@ -12,7 +12,9 @@
     <h2 v-else-if="score>=80">良好</h2>
     <h2 v-else-if="score>=60">及格</h2>
     <h2 v-else>不及格</h2>
-    <!--  ！！！计算属性-->
+
+    <!-- else-if这个东西用得不是特别多，假如有像上面这么复杂的逻辑判断的话，
+     老师不建议用标签的形式在这里通过指令的形式判断，用计算属性更好-->
     <h1>{{result}}</h1>
 </div>
 
@@ -26,7 +28,8 @@
         },
         computed: {
             result() {
-                let showMessage = '';
+                let showMessage = '';  // 别忘了初始化
+                // 最好在这里做一些判断
                 if (this.score >= 90) {
                     showMessage = '优秀'
                 } else if (this.score >= 80) {
