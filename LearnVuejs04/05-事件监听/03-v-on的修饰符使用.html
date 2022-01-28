@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <!-- 1. .stop修饰符的使用(阻止冒泡)
+    同时监听div和button的点击，这时候点击button，div也会被点击，这就是事件冒泡的知识点，它会传递过去。
+    我们以前很多时候希望阻止冒泡，很多时候是拿event去阻止冒泡，但在vue里直接使用修饰符即可。 -->
+    <div @click="divClick">
+        aaaaa
+        <button @click.stop="btnClick">按钮</button>
+    </div>
+
+    <!-- 2. .prevent修饰符的使用(阻止默认事件) 下方的案例就是阻止默认提交-->
+    <form action="baidu">
+        <!-- 一旦我们点击下面这个按钮，它会收集我们之前的数据，自动提交，但我们希望自己通过@click，自己来监听按钮的点击，到时候自己写一些代码，自己往服务器提交。
+        要实现手动提交的需求，需要加@click.prevent(原本没有)，用click事件去监听按钮的点击，可以实现自己收集数据，自己往服务器发送请求 -->
+        <input type="submit" value="提交" @click.prevent="submitClick">
+    </form>
+
+    <!-- 3. 监听某个键盘的键帽的点击
+    不加.enter就会监听所有按键的点击 -->
+    <!--<input type="text" @keyup="keyUp">-->
+    <input type="text" @keyup.enter="keyUp">
+
+    <!--  这里是自定义组件，要在后面加上.native，才能监听到这个组件的点击 -->
+    <!--  <cpn @click.native="cpnClick"></cpn>-->
+
+    <!--  4. .once修饰符的使用（某些东西只触发一次） -->
+    <button @click.once="btn2Click">按钮2</button>
+</div>
+
+<script src="../js/vue.js"></script>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: '你好啊'
+        },
+        methods: {
+            btnClick() {
+                console.log("btnClick");
+            },
+            divClick() {
+                console.log("divClick");
+            },
+            submitClick() {
+                console.log("submitClick");
+            },
+            keyUp() {
+                console.log("keyUp");
+            },
+            btn2Click() {
+                console.log("btn2Click");
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
