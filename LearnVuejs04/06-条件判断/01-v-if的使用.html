@@ -7,6 +7,8 @@
 <body>
 
 <div id="app">
+    <!-- 当满足一定条件时，才将h2中的内容渲染出来
+    v-if里面一般传bool值。真实开发时，一般搞一个变量，通过控制变量的状态确定h2中的东西是否显示出来-->
     <h2 v-if="isShow">
         <div>abc</div>
         <div>abc</div>
