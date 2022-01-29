@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <ul>
+    <!-- 加上key，性能会更高，但是在添加多条数据时，会报重复key的错误，故先不绑定key -->
+    <li v-for="item in letters">{{item}}</li>
+  </ul>
+  <!-- 通过按钮的点击事件，能够保留代码，意思是方法里演示代码 -->
+  <button @click="btnClick">按钮</button>
+</div>
+
+<script src="../js/vue.js"></script>
+
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      letters: ['a', 'b', 'c', 'd']
+    },
+    methods: {
+      btnClick() {
+        // 1. push方法（在数组最后面添加元素）（响应式）
+        // this.letters.push('aaa')
+        // 在代码提示里，看到方法括号里面有....,意味着可以传多个值
+        // this.letters.push('aaa', 'bbb', 'ccc')
+
+        /* 1.2 通过索引值，修改数组中的元素(这里数组有发生变化，但是界面上的内容没发生更新)
+        并不是所有改变数据的方法都是响应式的 */
+        // this.letters[0] = 'bbbbbb';
+
+        // 2. pop()：删除数组中的最后一个元素（响应式）
+        // this.letters.pop();
+
+        // 3. shift()：删除数组中的第一个元素（响应式）
+        // this.letters.shift();
+
+        // 4. unshift()：在数组最前面添加元素（响应式）
+        // this.letters.unshift('aaa')
+        // this.letters.unshift('aaa', 'bbb', 'ccc')
+
+        // 5. splice 作用：删除元素/插入元素/替换元素(关键就是第二个参数，判断操作)（响应式）
+        // !!! 注意这里的位置指的是下标值
+        // splice(start) 第一个参数start的意思是，你准备从哪个位置删除/插入/替换元素
+        // 删除元素：第二个元素传入你要删除几个元素(如果没有传，意味着删除后面所有的元素)
+        // 替换元素：第二个参数表示我们要替换几个元素，后面是用于替换前面的元素
+        // 插入元素：第二个参数，传入0，并且后面跟上要插入的元素
+
+        // 5.1 删除元素
+        // this.letters.splice(1, 2) 从位置1开始，删除两个元素
+        // this.letters.splice(1, this.letters.length - 1)
+        // const start = 2;
+        // this.letters.splice(start, this.letters.length - start)
+        // 这里为了简单起见，如果要删除start后面所有的，直接不传第二个参数即可
+        // this.letters.splice(start)
+
+        // 5.2 替换操作（我们可以理解为先删除3个元素，再将参数里的三个元素添加进去）
+        // this.letters.splice(1, 3, 'm', 'n', 'l')
+        // 5.3 插入元素
+        // this.letters.splice(1, 0, 'x', 'y','z') 源码里面也有... 将后面的东西放到数组里，然后进行操作
+
+        // 6. sort() 排序，这里可以传参数的（参数是函数，先不扩充）（响应式）
+        // this.letters.sort()
+
+        // 7. reverse() 反转（响应式）
+        // this.letters.reverse()
+
+        /* 8. 注意，通过索引值修改数组中的元素不是响应式的
+        这种方式，界面里不会改变，因为vue内部没有监听这个方式去改变数组*/
+        // this.letters[0] = 'bbb';
+
+        // 需求：将第一个元素改成bbb
+        // 8.1 老师更推荐这种方式，这种方式是修改数组，第二种方式理解起来可能有点别扭
+        this.letters.splice(0, 1, 'bbb')
+
+        /* 8.2 通过Vue的方式改第一个元素
+        set(要修改的对象，索引值,修改后的值)
+        Vue内部实现的函数，它可以帮你改，并也能做到响应式，修改数组时发送界面刷新 */
+        Vue.set(this.letters, 0, 'bbb')
+      }
+    }
+  })
+
+  // 1.3 可变参数的定义
+  function sum(...num) {
+    console.log(num);
+  }
+
+  /* 当函数写了可变参数时，下面的参数里就可以写多个值。
+  它会把你传入的多个值放都到数组里，然后在这里面利用这个数组 */
+  sum(20, 30, 40, 50, 100)
+  // function sum(num1, num2) {
+  //   return num1 + num2
+  // }
+  //
+  // function sum(num1, num2, num3) {
+  //   return num1 + num2 + num3
+  // }
+
+</script>
+
+</body>
+</html>
