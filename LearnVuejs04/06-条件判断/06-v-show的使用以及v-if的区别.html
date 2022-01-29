@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <!--  v-if: 当我们条件为false时，包含v-if指令的元素根本就不会存在在dom中（而如果把条件改成true，它会重新创建一个）
+     在isShow在true和false切换时，本质上是将这个东西从DOM中删除或重新创建。 -->
+    <h2 v-if="isShow" id="aaa">{{message}}</h2>
+
+    <!--  v-show: 当我们条件为false时，v-show只是给我们的元素增加了行内样式：display:none;
+    当isShow为false时，将display改成none，我们只是看不见，但元素还是存在在DOM里；当为true，就改为元素对应的block，显示出来就可以了。 -->
+    <h2 v-show="isShow" id="bbb">{{message}}</h2>
+</div>
+
+<script src="../js/vue.js"></script>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: '你好啊',
+            isShow: true
+        }
+    })
+</script>
+
+</body>
+</html>
