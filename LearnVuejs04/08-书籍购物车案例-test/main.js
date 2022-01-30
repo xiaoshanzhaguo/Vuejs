@@ -35,8 +35,18 @@ const app = new Vue({
   },
   methods: {
     <!-- 4.1.2 第一种方式，写一个方法，计算总价格 -->
-    getFinalPrice(price) {
-      return '￥' + price.toFixed(2);
+    // getFinalPrice(price) {
+    //   return '￥' + price.toFixed(2);
+    // },
+
+    // 5.1 监听按钮的点击
+    increment(index) {
+      // console.log('---', index)
+      this.books[index].count--;
+    },
+    decrement(index) {
+      // console.log('+++', index)
+      this.books[index].count++;
     }
   },
   // 讲过滤器,它是个函数.会自动把前面的数值（前面要过滤的东西）作为参数传进来

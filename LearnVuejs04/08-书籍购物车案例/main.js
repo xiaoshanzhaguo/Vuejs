@@ -38,6 +38,8 @@ const app = new Vue({
         // getFinalPrice(price) {
         //     return '￥' + price.toFixed(2)
         // },
+
+        // 5.1 监听按钮的点击
         increment(index) {
             // console.log('increment', index);
             this.books[index].count++;
