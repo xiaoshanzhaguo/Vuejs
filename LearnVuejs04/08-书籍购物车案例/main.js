@@ -34,9 +34,10 @@ const app = new Vue({
         ]
     },
     methods: {
-        getFinalPrice(price) {
-            return '￥' + price.toFixed(2)
-        },
+        <!-- 4.1.2 第一种方式，写一个方法，计算总价格 -->
+        // getFinalPrice(price) {
+        //     return '￥' + price.toFixed(2)
+        // },
         increment(index) {
             // console.log('increment', index);
             this.books[index].count++;
@@ -83,7 +84,7 @@ const app = new Vue({
             }, 0)
         }
     },
-    // 讲过滤器,它是个函数.会自动把前面的数值传进来
+    // 讲过滤器,它是个函数.会自动把前面的数值（前面要过滤的东西）作为参数传进来
     filters: {
         showPrice(price) {
             return '￥' + price.toFixed(2)

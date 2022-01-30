@@ -2,6 +2,7 @@ const app = new Vue({
   el: '#app',
   data: {
     books: [
+      // 3.2 在data里搞一个数组，如果想要再加一本书，直接在数组里多加一个对象即可。
       {
         id: 1,
         name: '《算法导论》',
@@ -31,5 +32,17 @@ const app = new Vue({
         count: 1
       }
     ]
+  },
+  methods: {
+    <!-- 4.1.2 第一种方式，写一个方法，计算总价格 -->
+    getFinalPrice(price) {
+      return '￥' + price.toFixed(2);
+    }
+  },
+  // 讲过滤器,它是个函数.会自动把前面的数值（前面要过滤的东西）作为参数传进来
+  filters: {
+    showPrice(price) {
+      return '￥' + price.toFixed(2);
+    }
   }
 })

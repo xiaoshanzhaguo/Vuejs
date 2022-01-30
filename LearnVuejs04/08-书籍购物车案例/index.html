@@ -38,8 +38,15 @@
         <td>{{item.id}}</td>
         <td>{{item.name}}</td>
         <td>{{item.date}}</td>
+
+        <!-- 4是过滤器的使用。 -->
+        <!-- 4.1 先让价格保留两位小数 -->
+        <!-- 4.1.1 下面这样写不好，因为最底部有总价格，格式跟它一样，可重复利用。 -->
         <!--        <td>{{'￥' + item.price.toFixed(2)}}</td>-->
+        <!-- 4.1.2 第一种方式，写一个方法，计算总价格 -->
         <!--        <td>{{getFinalPrice(item.price)}}</td>-->
+        <!-- 4.1.3 但是在vue里面，可以直接通过过滤器(angular中也学过)，直接对这个价格做一层过滤 -->
+        <!--<td>{{item.price | 过滤器}}</td>-->
         <td>{{item.price | showPrice}}</td>
         <td>
           <button @click="decrement(index)" v-bind:disabled="item.count <= 1">-</button>
@@ -62,6 +69,7 @@
 <script src="../js/vue.js"></script>
 <script src="main.js"></script>
 
+<!-- 4.1 在js里如何保留两位小数 -->
 <!--<script>-->
 <!--  123.toFixed-->
 <!--</script>-->
