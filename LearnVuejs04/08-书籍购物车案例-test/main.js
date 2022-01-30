@@ -47,6 +47,22 @@ const app = new Vue({
     decrement(index) {
       // console.log('+++', index)
       this.books[index].count++;
+    },
+
+    // 6.1 移除按钮，要确定移出哪本书，因此也要传一个index(注意这里不能放到计算属性中，否则只能调用一次)
+    removeHandle(index) {
+      this.books.splice(index, 1) // 删除一个
+    }
+  },
+  computed: {
+    // 7. 总价格(用计算属性，本质上是属性，
+    // 虽然看起来是个函数，但只是实现了这个属性的get方法)
+    totalPrice() {
+      let totalPrice = 0 // 保存最终的价格
+      for (let i = 0; i < this.books.length; i++) {
+        totalPrice += this.books[i].price * this.books[i].count
+      }
+      return totalPrice
     }
   },
   // 讲过滤器,它是个函数.会自动把前面的数值（前面要过滤的东西）作为参数传进来

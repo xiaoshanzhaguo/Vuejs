@@ -10,6 +10,7 @@
 
 <!-- 3. 先写html代码，将整体的结构写出来（3是界面搭建） -->
 <div id="app">
+  <!-- 6.2 购物车为空的情况，要在最外面包一层div -->
   <div v-if="books.length">
     <table>
       <!-- 3.1 先写头部(记得修改css) -->
@@ -59,6 +60,8 @@
           {{item.count}}
           <button @click="increment(index)">+</button>
         </td>
+
+        <!-- 6.1. 移除按钮 -->
         <td>
           <button @click="removeHandle(index)">移出</button>
         </td>
@@ -66,7 +69,11 @@
       </tbody>
     </table>
   </div>
+
+  <!-- 6.2 购物车为空的情况 -->
   <h2 v-else>购物车为空</h2>
+
+  <!-- 7. 总价格 -->
   <h2>总价格：{{totalPrice | showPrice}}</h2>
   <!-- <button disabled>按钮</button> -->
 </div>
