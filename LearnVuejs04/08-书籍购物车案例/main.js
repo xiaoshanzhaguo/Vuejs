@@ -1,6 +1,7 @@
 const app = new Vue({
     el: '#app',
     data: {
+        // 3.2 在data里搞一个数组，如果想要再加一本书，直接在数组里多加一个对象即可。
         books: [
             {
                 id: 1,
@@ -24,7 +25,7 @@ const app = new Vue({
                 count: 1
             },
             {
-                id: 1,
+                id: 4,
                 name: '《代码大全》',
                 date: '2006-3',
                 price: 128.00,
