@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+    <!-- 需求：希望多次使用下面的代码，以前的写法：重复多次。
+    但现在抽成组件更方便，不仅可以在这个界面，还可以在其他界面，甚至是其他项目中使用它。 -->
+    <!--<h2>我是标题</h2>-->
+    <!--<p>我是内容，哈哈哈哈</p>-->
+    <!--<p>我是内容，呵呵呵呵</p>-->
+
+    <!-- 3.使用组件 -->
+    <my-cpn></my-cpn>
+    <my-cpn></my-cpn>
+    <my-cpn></my-cpn>
+    <my-cpn></my-cpn>
+</div>
+
+<script src="../js/vue.js"></script>
+
+<script>
+
+    // 1.2 ES6语法 ``(它能换行)
+    // - 以前的换行
+    // const str = 'abc' +
+    //   'cde'
+    // - 现在的写法
+    // const s = `abc
+    // cde`
+
+    // 1.创建组件构造器对象(第一步先拿到Vue这个东西，然后通过extend方法创建组件构造器)
+    const cpnC = Vue.extend({
+        // template为组件
+        template: `
+      <div>
+        <h2>我是标题</h2>
+        <p>我是内容，哈哈哈哈</p>
+        <p>我是内容，呵呵呵呵</p>
+      </div>`
+    })
+
+    // 2.注册组件
+    Vue.component(`my-cpn`, cpnC) // 第一个为组件的标签，后一个传组件构造器
+
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: '你好啊'
+        }
+    })
+</script>
+
+</body>
+</html>
