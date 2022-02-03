@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <!-- 1. 选择一个 select里放的是option(select不是很常用)
+    name是往服务器提交时的key
+    !!! 注意，v-model要绑定到select上 -->
+    <select name="abc" v-model="fruit">
+        <!-- option只是select的选项，当你选择某一个选项时，再把对应的value赋值到fruit里面。 -->
+        <option value="苹果">苹果</option>
+        <option value="香蕉">香蕉</option>
+        <option value="葡萄">葡萄</option>
+        <option value="榴莲">榴莲</option>
+    </select>
+    <h2>您选择的水果是: {{fruit}}</h2>
+
+    <!-- 2.选择多个：要加multiple
+    由于id不能重复，因此把两个都为空的id都删除 -->
+    <select name="abcd" v-model="fruits" multiple>
+        <option value="苹果">苹果</option>
+        <option value="香蕉">香蕉</option>
+        <option value="葡萄">葡萄</option>
+        <option value="榴莲">榴莲</option>
+    </select>
+    <h2>您选择的水果是: {{fruits}}</h2>
+</div>
+
+<script src="../js/vue.js"></script>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: '你好啊',
+            fruit: '香蕉',   // 字符串类型
+            fruits: []  // 数组类型
+        }
+    })
+</script>
+
+</body>
+</html>
