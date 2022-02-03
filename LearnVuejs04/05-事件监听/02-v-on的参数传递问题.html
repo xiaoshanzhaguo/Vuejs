@@ -32,7 +32,7 @@
 
     <!-- 3.2 在参数中直接写event不行，找不到这个参数，因为直接这样写，vue会把它当成变量或方法（比如会去找data里定义的event变量）
     在调用方法时，如何手动得获取到浏览器参数的event对象：$event（固定写法），当vue在内部解析时，发现这里是$event，
-    它会拿到浏览器产生的evnet对象，作为参数传到btn3Click方法里
+    它会拿到浏览器产生的event对象，作为参数传到btn3Click方法里
     将第一个参数123改成'abc' 不加单引号就是一个变量或方法，需要在data里面定义才对 -->
     <button @click="btn3Click('abc',$event)">按钮3</button>
 

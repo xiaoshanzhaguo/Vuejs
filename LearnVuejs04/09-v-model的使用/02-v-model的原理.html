@@ -8,8 +8,11 @@
 
 <div id="app">
     <!--  <input type="text" v-model="message">-->
+    <!--<input type="text" :value="message" @input="valueChange">-->
+
     <!--  用别的方法实现双向绑定-->
-    <!--  @input = v-on:input-->
+    <!--  注意绑定input里的数据，对应的属性是value -->
+    <!--  $event传入event事件对象 -->
     <input type="text" :value="message" @input="message = $event.target.value">
 
     <h2>{{message}}</h2>
@@ -24,7 +27,7 @@
             message: '你好啊'
         },
         methods: {
-            valueChange(event) {
+            valueChange(event) { // 这里加event的话，上面调用方法不用加event，可以省略，它会自动把event传过来。
                 // 在调用时不用传参数，会自动传入event
                 this.message = event.target.value
                 // console.log("---");
