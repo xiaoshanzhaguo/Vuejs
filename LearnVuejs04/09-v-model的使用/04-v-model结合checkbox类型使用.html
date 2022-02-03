@@ -26,6 +26,11 @@
     <input type="checkbox" value="乒乓球" v-model="hobbies">乒乓球
     <h2>您的爱好是： {{hobbies}}</h2>
 
+    <!-- input中的值绑定，之前的input中的value都是写死的 -->
+    <!--<input type="checkbox" v-for="item in originHobbies" :value="item">-->
+    <!-- 你最好绑定一个label(真实开发中，input也放在label中)，有一个label会比较好一点。
+    v-for写到label里更好，因为待会要在作用域里使用刚才那个item。
+    id和for也是可以动态绑定的！！！ (同时，在这里不写id和for，也有点击文字选中的效果?) -->
     <label v-for="item in originHobbies" :for="item">
         <input type="checkbox" :value="item" :id="item" v-model="hobbies">{{item}}
     </label>
@@ -40,6 +45,7 @@
             message: '你好啊',
             isAgree: false,   // 单选框：bool值
             hobbies: [], // 多选框：数组
+            // 先有一个原始的球类运动，input中的value就不用写死了
             originHobbies: ['篮球', '足球', '乒乓球', '羽毛球', '台球', '高尔夫球']
         }
     })
