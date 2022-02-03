@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <!-- 1. 修饰符：lazy lazyload是懒加载(用到时再加载)
+    用户边输入，值边绑定过去，但一般是用户输入完敲回车(或失去焦点)才绑定过去。 -->
+    <input type="text" v-model.lazy="message">
+    <h2>{{message}}</h2>
+
+    <!-- 2. 修饰符：number
+    我们有时候希望用户在输入框里输入的是一些数字。 -->
+    <input type="number" v-model.number="age">
+    <!-- (这里还没有加number) typeof age--获取变量类型,这里是string类型。尽管我们data里的age初始值为0，
+    但是当在输入框中输入数据时，显示的还是string类型，这是因为v-model默认绑定过去的东西，都会把这个东西赋值成string类型。(看最下面)
+    但是有时候，我们确实希望这里是number类型，故要在v-model后加number。这样在用它的时候就不用做类型转换了。 -->
+    <h2>{{age}} {{typeof age}}</h2>
+
+    <!-- 3.修饰符 trim(拨除字符串两边的空格)
+    尽管我们在输入框里输入很多个空格，但浏览器只显示一个空格(会去除其他的空格,它自动做一一些处理)。
+    但我们真实用的时候，希望把左右两边多余的空格删掉。 -->
+    <input type="text" v-model.trim="name">
+    <h2>您输入的名字：{{name}}</h2>
+</div>
+
+<script src="../js/vue.js"></script>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: '你好啊',
+            age: 0,
+            name: ''
+        }
+    })
+
+    // v-model在给变量赋值时，默认是string类型
+    var age = 0
+    age = '1111'
+    age = '222'
+</script>
+
+</body>
+</html>
