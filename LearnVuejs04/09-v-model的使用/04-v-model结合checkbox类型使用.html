@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <!-- 1. checkbox单选框(应该是单个复选框) 一般对应bool类型 -->
+    <!-- 一般来说，一个label对应一个input -->
+    <label for="agree">
+        <!-- 这里不知道选中为什么是true的同学，checkbox里面的value对应的就是是否选中，
+        true为选中，false反之，v-model绑定的是checkbox的value值 -->
+        <input type="checkbox" id="agree" v-model="isAgree">同意协议
+    </label>
+    <h2>您选择的是：{{isAgree}}</h2>
+    <button :disabled="!isAgree">下一步</button>
+
+    <!-- 2. checkbox多选框 一般对应数组类型-->
+    <!-- 下面这个value用于我之后获取的文字(东西)
+        你只要选中，就会被加到数组中 -->
+    <input type="checkbox" value="篮球" v-model="hobbies">篮球
+    <input type="checkbox" value="足球" v-model="hobbies">足球
+    <input type="checkbox" value="羽毛球" v-model="hobbies">羽毛球
+    <input type="checkbox" value="乒乓球" v-model="hobbies">乒乓球
+    <h2>您的爱好是： {{hobbies}}</h2>
+
+    <label v-for="item in originHobbies" :for="item">
+        <input type="checkbox" :value="item" :id="item" v-model="hobbies">{{item}}
+    </label>
+</div>
+
+<script src="../js/vue.js"></script>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: '你好啊',
+            isAgree: false,   // 单选框：bool值
+            hobbies: [], // 多选框：数组
+            originHobbies: ['篮球', '足球', '乒乓球', '羽毛球', '台球', '高尔夫球']
+        }
+    })
+</script>
+
+</body>
+</html>
