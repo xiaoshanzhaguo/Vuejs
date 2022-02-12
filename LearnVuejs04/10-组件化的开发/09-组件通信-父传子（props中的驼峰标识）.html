@@ -7,11 +7,14 @@
 <body>
 
 <div id="app">
+    <!-- 父组件里的东西向子组件传，并显示出来 -->
+    <!--<cpn :cInfo="info"></cpn>  v-bind这样写，不支持驼峰！！！ -->
     <cpn :c-info="info" :child-my-message="message"></cpn>
 </div>
 
 <template id="cpn">
-    <!--   vue中，子组件模板里包含多个标签时，需要在根里-->
+    <!--  Vue中，子组件模板里包含多个标签时，需要在根里
+    一般情况下，在定义子组件模板时，我们必须给它一个根，即要有外层的东西给它包起来，如果这里的代码比较多的时候。 -->
     <div>
         <h2>{{cInfo}}</h2>
         <h2>{{childMyMessage}}</h2>
@@ -24,6 +27,7 @@
     const cpn = {
         template: `#cpn`,
         props: {
+            // cinfo
             cInfo: {
                 type: Object,
                 default() {
@@ -32,9 +36,7 @@
             },
             childMyMessage: {
                 type: String,
-                default() {
-                    return undefined;
-                }
+                default: ''
             }
         }
     }
