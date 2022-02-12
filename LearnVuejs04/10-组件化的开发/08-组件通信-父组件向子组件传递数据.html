@@ -1,71 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Title</title>
 </head>
 <body>
 
 <div id="app">
-    <!--   一定要使用v-bind-->
-    <cpn :cmovies="movies" :cmessage="message"></cpn>
+  <!-- 一定要使用v-bind，如果不用它，不会把movies当成变量去寻找，
+  就会把它当成字符串赋值给xxx，显示的就是movies和message -->
+  <!-- 2.4 props数组，展示 -->
+  <cpn :cmovies="movies" :cmessage="message"></cpn>
 </div>
 
 <template id="cpn">
-    <div>
-        <ul>
-            <li v-for="item in cmovies">{{item}}</li>
-        </ul>
-        <!--    <p>{{cmovies}}</p>-->
-        <h2>{{cmessage}}</h2>
-    </div>
+  <!-- 2.4 props数组，展示 -->
+  <!-- 不加div的话，下面的h2就显示不出来了 -->
+  <div>
+    <ul>
+      <li v-for="item in cmovies">{{item}}</li>
+    </ul>
+    <!--    <p>{{cmovies}}</p>-->
+    <h2>{{cmessage}}</h2>
+  </div>
 </template>
 
 <script src="../js/vue.js"></script>
 
 <script>
-    // 父传子：props
-    const cpn = {
-        template: `#cpn`,
-        //props: ['cmovies', 'cmessage'],  //props---变量，会被看成一个变量
-        props: {
-            // // 1. 类型限制
-            // cmovies: Array,  //要求数据必须为数组型
-            // cmessage: String,
+  // 父传子：props
+  const cpn = {
+    template: `#cpn`,
+    // 2.2 在父中定义一些数据，希望传给子，并展示出来
 
-            // 2.提供一些默认值,以及必传值
-            cmessage: {
-                type: String,
-                default: 'aaaaaa',   //默认值
-                required: true   // 必传值
-            },
-            // 类型是对象或者数组时，默认值必须是一个函数
-            cmovies: {
-                type: Array,
-                // default: []  // vue2.5.17以下
-                default() {
-                    return []
-                }
-            }
+    // 2.3 props可以传数组、对象
+    // 不要把'cmovies'看成字符串，而应看成变量
+    //props: ['cmovies', 'cmessage'],
+    props: {
+      // 3. props使用对象类型
+      // 3.1 类型限制
+      // cmovies: Array,  //要求数据必须为数组型
+      // cmessage: String,
+
+      // 3.2 提供一些默认值,以及必传值
+      cmessage: {
+        type: String,
+        default: 'aaaaaa',   // 默认值
+        required: true   // 必传值
+      },
+
+      // 3.3 类型是对象或者数组时，默认值必须是一个函数
+      cmovies: {
+        type: Array,
+        // default: []  // vue2.5.17以下
+        default() {
+          return []
         }
+      }
     }
-    const app = new Vue({
-        el: '#app',
-        data: {
-            message: '你好啊',
-            movies: ['海王', '海贼王', '海尔兄弟']
-        },
-        components: {
-            cpn  // 这里是增强写法，相当于 cpn: cpn(前面加不加单引号都可以)
-        }
-    })
+  }
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好啊',
+      // 2. 在父中定义一些数据，希望传给子，并展示出来
+      movies: ['海王', '海贼王', '海尔兄弟']
+    },
+    components: {
+      // 1. 先写父子关系
+      // 'cpn': cpn
+      cpn  // 这里是对象字面量属性的增强写法，相当于 cpn: cpn(前面加不加单引号都可以)
+    }
+  })
 
-    // const name = 'why'
-    //
-    // const obj = {
-    //   name: name,
-    //   name
-    // }
+  // 1.2 增强写法
+  // const name = 'why'
+  //
+  // const obj = {
+  //   name: name,
+  //   name
+  // }
 </script>
 
 </body>
