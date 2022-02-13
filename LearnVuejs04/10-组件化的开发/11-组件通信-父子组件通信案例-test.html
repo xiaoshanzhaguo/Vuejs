@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <!-- 中间没有东西的话，可以使用单标签。-->
+  <!-- 监听子发送到父的事件 -->
+  <cpn :number1="num1" :number2="num2"></cpn>
+</div>
+
+<template id="cpn">
+  <!-- 组件模板里必须有根。-->
+  <div>
+    <h2>{{number1}}</h2>
+    <input type="text" v-model="number1">
+    <h2>{{number2}}</h2>
+    <input type="text" v-model="number2">
+  </div>
+</template>
+
+<script src="../js/vue.js"></script>
+
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      num1: 1,
+      num2: 0
+    },
+    components: {
+      cpn: {
+        template: `#cpn`,
+        props: {
+          number1: Number,
+          number2: Number
+        }
+      }
+    }
+  })
+</script>
+
+</body>
+</html>
