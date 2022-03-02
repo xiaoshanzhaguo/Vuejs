@@ -6,8 +6,11 @@
 </head>
 <body>
 
+<!-- 需求：当我点击按钮时，就把子组件的对象打印一下。 -->
+
 <div id="app">
-    <!--  单标签也可以 -->
+    <!--  这里直接使用单标签也可以，但是后面有东西的话，后面的东西不能显示，
+    就不能写成单标签的形式！！！但是讲道理应该没问题啊。 -->
     <cpn></cpn>
     <cpn></cpn>
     <my-cpn></my-cpn>
@@ -31,16 +34,16 @@
         methods: {
             btnClick() {
                 // 1. $children
-                // console.log(this.$children);
-                // // this.$children[0].showMessage();
-                // // this.$children[0].name
+                // console.log(this.$children);   // 直接打印子组件的对象
+                // this.$children[0].showMessage();  // 拿到这个元素，并调用方法
+                // this.$children[0].name
                 // for (let c of this.$children) {
                 //   console.log(c.name);
-                //   // 这个不用打印，是调用方法
-                //   c.showMessage();
+                //   c.showMessage(); // 这个不用打印，是调用方法
                 // }
 
-                // 2.$refs(默认为空对象，对象类型),对应key去拿 ref='bbb'
+                // 2.$refs(默认为空对象，对象类型)，在cpn里加了ref='aaa'后它就不是空对象了，
+                // 而是能拿到组件。对应key去拿 ref='aaa'
                 console.log(this.$refs.aaa.name);
             }
         },
