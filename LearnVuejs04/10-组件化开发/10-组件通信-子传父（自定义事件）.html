@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!-- 我们现在希望的是子组件里面可能有一些数据或者东西，希望给父组件传过去。
+但比较常见的是，子组件里产生一些事件，希望父组件知道。 -->
+
+<!-- 父组件模板 -->
+<div id="app">
+  <!-- 1.6 父组件监听事件
+  v-on:  === @ 监听 -->
+  <cpn @item-click="cpnClick"></cpn>
+  <!-- 1.7 将item传过去，接收item，打印item
+  cpnClick不加参数时，不像以前是把event事件传过去，而是默认将btnClick里的item对象传过去。 -->
+</div>
+
+<!-- 子组件模板 -->
+<template id="cpn">
+  <!-- vue中，子组件模板里包含多个标签时，需要在根里 -->
+  <div>
+    <!-- 1.3 展示数据，
+         1.5 再加上点击事件 -->
+    <button v-for="item in categories"
+            @click="btnClick(item)">
+      {{item.name}}
+    </button>
+  </div>
+</template>
+
+<script src="../js/vue.js"></script>
+
+<script>
+  // 1. 子组件
+  const cpn = {
+    template: `#cpn`,
+    data() {
+      return {
+        // 1.2 数据
+        categories: [
+          {id: 'aaa', name: '热门推荐'},
+          {id: 'bbb', name: '手机数码'},
+          {id: 'ccc', name: '家用家电'},
+          {id: 'ddd', name: '电脑办公'}
+        ]
+      }
+    },
+    // 1.4 发射事件：自定义事件
+    methods: {
+      btnClick(item) {
+        // 拿到item，获得id
+        // 需求：父组件要根据子组件里点击了谁，再去请求新的数据，因此需要把点击了谁告诉父组件
+        this.$emit('item-click', item) // 第一个参数：事件名称，第二个参数：发射事件传递的参数
+      }
+    }
+  }
+
+  // 2. 父组件
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好啊'
+    },
+    components: {
+      cpn
+    },
+    methods: {
+      // 1.6 父组件监听事件
+      /* 1.7 将item传过去，接收item，打印item
+      cpnClick不加参数时，不像以前是把event事件传过去，而是默认将btnClick里的item对象传过去 */
+      // item别忘了，如果父组件里没有item，在子组件模板中，会默认把发射事件里的item传过去
+      cpnClick(item) {
+        console.log('cpnClick', item);
+      }
+    }
+  })
+</script>
+
+</body>
+</html>
