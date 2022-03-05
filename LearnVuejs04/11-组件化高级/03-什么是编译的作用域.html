@@ -8,7 +8,10 @@
 
 <div id="app">
     <cpn v-show="isShow"></cpn>  <!-- 这里会用实例中的isShow -->
+
+    <!-- 代码中没有设置下面的代码，因此缩放的时候显示得很小。 -->
     <!--  <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+
     <cpn v-for="item in names"></cpn>  <!-- 看一下模板在哪个作用域里 -->
 </div>
 
