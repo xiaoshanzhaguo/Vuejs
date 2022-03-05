@@ -6,11 +6,16 @@
 </head>
 <body>
 
+<!-- 需求：只想改中间的部分。 -->
+
 <div id="app">
+    <!-- 如果你只在span中写了一个，它就会将左中右的插槽的值都替换了。这时要给插槽起名字。这时下面的代码会替换没有没有名字的插槽。-->
+    <!--<cpn><span>标题</span></cpn>-->
+
     <cpn><span slot="center">标题</span></cpn>  <!-- 这里换中间的那个 -->
     <cpn>
         <button slot="left">返回</button>
-    </cpn> <!-- 这里换最左边的那个 -->
+    </cpn> <!-- 这里换最左边的那个，并且还可以用button替换。 -->
 </div>
 
 <template id="cpn">
