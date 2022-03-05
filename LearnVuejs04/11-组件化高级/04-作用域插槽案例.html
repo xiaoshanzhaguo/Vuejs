@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!-- 需求：子组件中包含了一组数据，pLanguages: ['JavaScript', 'C++', 'Java', 'C#', 'Python', 'go', 'Swift']，
+子组件可能进行默认的展示，子组件为了把这些数据展示出来，它最终以逗号的形式将所有的内容展示出来，但是父组件发现子组件展示的数据不是它想要的要求，
+它想通过另外的形式进行展示，这个时候就用到作用域插槽了。 -->
+
+<div id="app">
+    <cpn></cpn>
+
+    <!-- 父组件中还希望以别的形式展示数据，因为默认的效果不是想要的效果。 -->
+    <cpn>
+        <!-- <span v-for="item in pLanguages"></span>  这种写法不行，不能拿到子组件里的数据。 -->
+
+        <!-- 父组件中想要展示子组件中的数据。你就必须想办法把数据传过去。 -->
+        <!-- 目的是获取子组件中的pLanguages
+        vue2.5.x以下，要用template模板，2.5.x以上用div也可以。但是为了让它有更强的适应性，用template。
+        目的：通过template拿到刚才传过去的data——pLanguage，通过slot-scope="slot"拿到，
+        然后通过slot引用刚才的插槽对象，然后能获取到slot.data -->
+        <template slot-scope="slot">
+            <!--      <span v-for="item in slot.data">{{item}} - </span>   这里取到的slot.data就是子组件里的data——pLanguages。 -->
+            <span>{{slot.data.join(' - ')}}</span>  <!-- 这里意味着用-来进行分割  -->
+        </template>
+    </cpn>
+    <!--  <cpn></cpn>-->
+
+    <cpn>
+        <template slot-scope="slot">
+            <!--      <span v-for="item in slot.data">{{item}} * </span>-->
+            <span>{{slot.data.join(' * ')}}</span>
+        </template>
+    </cpn>
+</div>
+
+<template id="cpn">
+    <div>
+        <!-- 在slot中不仅能定义name，还可以绑定属性 -->
+        <slot :data="pLanguages">
+            <!-- 在子组件中通过列表的形式展示。 -->
+            <ul>
+                <li v-for="item in pLanguages">{{item}}</li>
+            </ul>
+        </slot>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: '你好啊'
+        },
+        components: {
+            cpn: {
+                template: `#cpn`,
+                data() {
+                    return {
+                        pLanguages: ['JavaScript', 'C++', 'Java', 'C#', 'Python', 'go', 'Swift']
+                    }
+                },
+                created() {
+                    this.pLanguages.join('---')
+                }
+            }
+        }
+    })
+</script>
+
+
+</body>
+</html>
