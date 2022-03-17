@@ -1,5 +1,5 @@
 // 配置路由相关的信息
-import VueRouter from 'vue-router'
+import VueRouter from 'vue-router'  // 使用的框架，导入它。
 import Vue from 'vue'
 // import Home from '../components/Home'
 // import About from "../components/About";
@@ -15,10 +15,13 @@ const User = () => import('../components/User')
 const Profile = () => import('../components/Profile')
 
 
-// 1. 通过Vue.use(插件)，安装插件
+// 使用vue-router分为三个步骤
+
+// 1. 通过Vue.use(插件)，来安装插件 （不管以后使用的是什么插件，都需要来安装这个插件）
 Vue.use(VueRouter)
 
-// 2.创建VueRouter对象
+// 2. 创建VueRouter对象
+// 下面是先将routes分离出来
 const routes = [
   {
     // 这里是缺省的
@@ -27,7 +30,7 @@ const routes = [
     redirect: '/home'
   },
   {
-    // 协议头://host/query
+    // 完整的url——协议头://host/query。 下面只是相对的路径
     path: '/home',
     component: Home,
     // 原数据
@@ -79,11 +82,9 @@ const routes = [
 ]
 const router = new VueRouter({
   // 这里传入options，即选项
-  // 配置路由和组件之间的应用关系
-  // 这里是ES6的增强语法
-  routes,
-  // 这里会使得路径变成html5的history模式
-  mode: 'history',
+
+  routes,  // 配置路由和组件之间的应用关系，这里是ES6的增强语法
+  mode: 'history',  // 这里会使得路径变成html5的history模式
   linkActiveClass : 'active'
 })
 
@@ -102,5 +103,5 @@ router.afterEach((to, from) => {
   // console.log('----');
 })
 
-// 3.将router对象传入到Vue实例中
+// 3. 将router对象传入到Vue实例中（也就是说router对象什么时候才能产生效果？必须把router挂载在Vue实例里，才能起作用。之前只是new对象，但是根本没使用它）
 export default router  // 这里是导出
