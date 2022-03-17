@@ -24,10 +24,8 @@ Vue.use(VueRouter)
 // 下面是先将routes分离出来
 const routes = [
   {
-    // 这里是缺省的
-    path: '',
-    // redirect 重定向：重新定义一个方向
-    redirect: '/home'
+    path: '', // 这里是缺省的。加上/和不加/都可以。
+    redirect: '/home' // redirect 重定向：重新定义一个方向
   },
   {
     // 完整的url——协议头://host/query。 下面只是相对的路径
