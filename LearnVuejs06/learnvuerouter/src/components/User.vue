@@ -14,9 +14,9 @@ export default {
   computed: {
     userId() {
       //  router: 这里是之前index.js里创建的大的router对象
-      //  route: 当前哪一个路由处于活跃状态，哪一个就是route
+      //  route: 当前哪一个路由处于活跃状态，哪一个就是拿到的route (path,component: xxx)
       //  params: parameters 参数的缩写
-      return this.$route.params.id
+      return this.$route.params.id  // id对应配置里的id
     }
   },
   created() {
