@@ -21,8 +21,10 @@ new Vue({
 
 console.log(router);
 
-const obj = {
-  name: 'why'
-}
+// 以前的写法
+//const obj = {
+//  name: 'why'
+//}
 
+// 下面这个defineProperty方法是Vue响应式实现的核心
 // Object.defineProperty(obj, 'age', 18)
