@@ -62,10 +62,10 @@ export default {
       console.log("aboutClick");
     },
     userClick() {
-      this.$router.push('/user/'+this.userId)
+      this.$router.push('/user/'+this.userId)  // 跳转路径
     },
     profileClick() {
-      // 这里可以直接传对象
+      // 这里可以直接传对象(这里不像上面一样直接添加跳转的路径，而是传一个对象，然后就可以传递数据)
       this.$router.push({
         path: '/profile',
         query: {
