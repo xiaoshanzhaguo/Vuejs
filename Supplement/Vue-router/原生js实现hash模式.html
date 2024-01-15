@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <!-- 定义路由 -->
+        <li><a href="#/home">home</a></li>
+        <li><a href="#/about">about</a></li>
+
+        <!-- 渲染路由对应的UI -->
+        <div id="routeView"></div>
+    </ul>
+</body>
+
+<!-- 
+    我们通过a标签的href属性来改变URL的hash值（当然，你触发浏览器的前进后退按钮也可以，或者在控制台输入window.location赋值来改变hash）
+    我们监听hashchange事件。一旦事件触发，就改变routerView的内容，若是在vue中，这改变的应当是router-view这个组件的内容
+    为何又监听了load事件？这时应为页面第一次加载完不会触发 hashchange，因而用load事件来监听hash值，再将视图渲染成对应的内容。
+ -->
+
+<script>
+    let routeView = document.getElementById("routeView")
+    window.addEventListener('hashchange', () => {
+        let hash = location.hash
+        routeView.innerHTML = hash
+    })
+    window.addEventListener('DOMContentLoaded', () => {
+        // 如果不存在hash值，那么重定向到#/
+        if (!location.hash) {
+            location.hash = "/"
+        } else {
+            // 如果存在hash值，那就渲染对应UI
+            let hash = location.hash
+            routeView.innerHTML = hash
+        }
+    })
+</script>
+</html>
