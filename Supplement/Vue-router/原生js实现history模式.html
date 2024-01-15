@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li><a href="/home">home</a></li>
+        <li><a href="/about">about</a></li>
+
+        <div id="routeView"></div>
+    </ul>
+</body>
+
+<!-- 1. 我们通过a标签的href属性来改变URL的path值（当然，你触发浏览器的前进后退按钮也可以，或者在控制台输入history.go,back,forward赋值来触发popState事件）。
+        这里需要注意的就是，当改变path值时，默认会触发页面的跳转，所以需要拦截 <a> 标签点击事件默认行为，点击时使用 pushState 修改 URL并更新手动 UI，从而实现点击链接更新 URL 和 UI 的效果。
+     2. 我们监听popState事件。一旦事件触发，就改变routerView的内容。
+     3. load事件则是一样的
+     4. 有个问题：hash模式，也可以用history.go,back,forward来触发hashchange事件吗？
+        A：也是可以的。因为不管什么模式，浏览器为保存记录都会有一个栈。
+ -->
+
+<script>
+    let routeView = document.getElementById("routeView")
+    window.addEventListener("DOMContentLoaded", onLoad)
+    window.addEventListener("popstate", () => {
+        routeView.innerHTML = location.pathname
+    })
+
+    function onLoad() {
+        routeView.innerHTML = location.pathname
+        var linkList = document.querySelectorAll("a[href]")
+        linkList.forEach(el => el.addEventListener("click", function(e) {
+            e.preventDefault()
+            history.pushState(null, '', el.getAttribute('href'))
+            routeView.innerHTML = location.pathname
+        }))
+    }
+</script>
+</html>
